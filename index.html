@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Navio Inc — IT Staffing & Consulting</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #0f2744;
+      --navy-mid: #1a3a5c;
+      --accent: #1e7fd4;
+      --accent-light: #e8f3fc;
+      --text: #1a1a2e;
+      --text-muted: #5a6478;
+      --border: #e2e8f0;
+      --bg: #ffffff;
+      --bg-alt: #f7f9fc;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.65;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1.5rem;
+      color: var(--navy);
+      text-decoration: none;
+      letter-spacing: -0.5px;
+    }
+
+    .nav-logo span { color: var(--accent); }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--navy); }
+
+    .nav-cta {
+      background: var(--accent);
+      color: #fff !important;
+      padding: 0.5rem 1.25rem;
+      border-radius: 6px;
+      font-weight: 600 !important;
+      transition: background 0.2s !important;
+    }
+
+    .nav-cta:hover { background: #1567b8 !important; color: #fff !important; }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      background: var(--navy);
+      display: flex;
+      align-items: center;
+      padding: 6rem 2rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -200px; right: -200px;
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(30,127,212,0.18) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .hero-eyebrow {
+      display: inline-block;
+      background: rgba(30,127,212,0.2);
+      color: #7fc4f7;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.35rem 0.85rem;
+      border-radius: 100px;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2.4rem, 5vw, 3.6rem);
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.1;
+      letter-spacing: -1px;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero h1 em {
+      font-style: normal;
+      color: #7fc4f7;
+    }
+
+    .hero-desc {
+      color: #a0b4c8;
+      font-size: 1.05rem;
+      margin-bottom: 2.5rem;
+      max-width: 460px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+      padding: 0.85rem 2rem;
+      border-radius: 7px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+      display: inline-block;
+    }
+
+    .btn-primary:hover { background: #1567b8; transform: translateY(-1px); }
+
+    .btn-outline {
+      border: 1px solid rgba(255,255,255,0.3);
+      color: #fff;
+      padding: 0.85rem 2rem;
+      border-radius: 7px;
+      font-weight: 500;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: border-color 0.2s, background 0.2s;
+      display: inline-block;
+    }
+
+    .btn-outline:hover { border-color: #fff; background: rgba(255,255,255,0.08); }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+    }
+
+    .stat-card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px;
+      padding: 1.5rem;
+    }
+
+    .stat-card .num {
+      font-family: 'Syne', sans-serif;
+      font-size: 2.4rem;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1;
+    }
+
+    .stat-card .num span { color: #7fc4f7; }
+
+    .stat-card .label {
+      font-size: 0.82rem;
+      color: #7f9ab0;
+      margin-top: 0.4rem;
+    }
+
+    /* TRUST LOGOS */
+    .trust-bar {
+      background: var(--bg-alt);
+      border-bottom: 1px solid var(--border);
+      padding: 1.5rem 2rem;
+      text-align: center;
+    }
+
+    .trust-bar p {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 1.25rem;
+    }
+
+    .trust-logos {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 3rem;
+      flex-wrap: wrap;
+    }
+
+    .trust-logo {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: #b0b8c8;
+      letter-spacing: -0.5px;
+    }
+
+    /* SECTIONS */
+    section { padding: 6rem 2rem; }
+
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+
+    .section-tag {
+      display: inline-block;
+      background: var(--accent-light);
+      color: var(--accent);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.8rem;
+      border-radius: 100px;
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      font-weight: 800;
+      color: var(--navy);
+      letter-spacing: -0.5px;
+      line-height: 1.15;
+      margin-bottom: 1rem;
+    }
+
+    .section-sub {
+      color: var(--text-muted);
+      font-size: 1rem;
+      max-width: 520px;
+      margin-bottom: 3rem;
+    }
+
+    /* SERVICES */
+    #services { background: var(--bg); }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .service-card {
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 2rem;
+      transition: box-shadow 0.25s, border-color 0.25s, transform 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--accent);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s;
+    }
+
+    .service-card:hover {
+      box-shadow: 0 8px 32px rgba(15,39,68,0.1);
+      border-color: #c0d4e8;
+      transform: translateY(-2px);
+    }
+
+    .service-card:hover::before { transform: scaleX(1); }
+
+    .service-icon {
+      width: 46px; height: 46px;
+      background: var(--accent-light);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.25rem;
+    }
+
+    .service-icon svg { width: 22px; height: 22px; stroke: var(--accent); fill: none; stroke-width: 2; stroke-linecap: round; }
+
+    .service-card h3 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 0.6rem;
+    }
+
+    .service-card p {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+    }
+
+    /* APPROACH */
+    #approach { background: var(--navy); }
+
+    #approach .section-title { color: #fff; }
+    #approach .section-sub { color: #8fa8c0; }
+    #approach .section-tag { background: rgba(30,127,212,0.2); color: #7fc4f7; }
+
+    .approach-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+    }
+
+    .approach-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 14px;
+      padding: 2rem;
+      display: flex;
+      gap: 1rem;
+    }
+
+    .approach-num {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: rgba(30,127,212,0.5);
+      line-height: 1;
+      flex-shrink: 0;
+    }
+
+    .approach-card h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 0.4rem;
+    }
+
+    .approach-card p {
+      font-size: 0.86rem;
+      color: #7f9ab0;
+    }
+
+    /* WHY US */
+    #why { background: var(--bg-alt); }
+
+    .why-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem 4rem;
+      align-items: start;
+    }
+
+    .why-left { }
+
+    .why-list { list-style: none; display: flex; flex-direction: column; gap: 1rem; }
+
+    .why-item {
+      display: flex;
+      gap: 0.85rem;
+      align-items: flex-start;
+    }
+
+    .check {
+      width: 22px; height: 22px;
+      background: var(--accent);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .check svg { width: 11px; height: 11px; stroke: #fff; fill: none; stroke-width: 2.5; stroke-linecap: round; }
+
+    .why-item span { font-size: 0.92rem; color: var(--text); }
+
+    .why-right {
+      background: var(--navy);
+      border-radius: 16px;
+      padding: 2.5rem;
+      color: #fff;
+    }
+
+    .why-right h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+      color: #fff;
+    }
+
+    .why-right p {
+      font-size: 0.9rem;
+      color: #8fa8c0;
+      margin-bottom: 1.5rem;
+    }
+
+    .contact-detail {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-top: 1rem;
+    }
+
+    .contact-detail svg { width: 18px; height: 18px; stroke: var(--accent); fill: none; stroke-width: 2; flex-shrink: 0; }
+
+    .contact-detail a {
+      color: #7fc4f7;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+    }
+
+    /* CTA */
+    #contact {
+      background: linear-gradient(135deg, var(--accent) 0%, #0e52a0 100%);
+      text-align: center;
+    }
+
+    #contact .section-title { color: #fff; }
+
+    #contact p {
+      color: rgba(255,255,255,0.8);
+      max-width: 480px;
+      margin: 0 auto 2.5rem;
+    }
+
+    #contact .btn-white {
+      background: #fff;
+      color: var(--accent);
+      padding: 0.9rem 2.25rem;
+      border-radius: 7px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      text-decoration: none;
+      display: inline-block;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    #contact .btn-white:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--navy);
+      color: #6a8099;
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.82rem;
+    }
+
+    footer a { color: #7fc4f7; text-decoration: none; }
+
+    /* MOBILE */
+    @media (max-width: 768px) {
+      .hero-inner { grid-template-columns: 1fr; gap: 3rem; }
+      .hero-stats { grid-template-columns: 1fr 1fr; }
+      .approach-grid { grid-template-columns: 1fr; }
+      .why-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Nav<span>io</span></a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#approach">Our Process</a></li>
+    <li><a href="#why">Why Navio</a></li>
+    <li><a href="#contact" class="nav-cta">Contact Us</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-eyebrow">IT Staffing &amp; Consulting</div>
+      <h1>Hire the <em>right talent,</em> right now.</h1>
+      <p class="hero-desc">Navio matches skilled IT professionals with companies that need them — fast, flexible, and with a personal touch you won't find at a big agency.</p>
+      <div class="hero-actions">
+        <a href="#services" class="btn-primary">Explore Services</a>
+        <a href="#contact" class="btn-outline">Get in Touch</a>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-card">
+        <div class="num">500<span>+</span></div>
+        <div class="label">Candidates placed</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">48<span>h</span></div>
+        <div class="label">Avg. turnaround time</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">100<span>%</span></div>
+        <div class="label">Dedicated focus per client</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">10<span>+</span></div>
+        <div class="label">Years in IT staffing</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <p>Trusted by forward-thinking teams</p>
+  <div class="trust-logos">
+    <span class="trust-logo">Accenture</span>
+    <span class="trust-logo">Deloitte</span>
+    <span class="trust-logo">Infosys</span>
+    <span class="trust-logo">Cognizant</span>
+    <span class="trust-logo">TechMahindra</span>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-inner">
+    <div class="section-tag">What We Do</div>
+    <h2 class="section-title">End-to-end staffing solutions</h2>
+    <p class="section-sub">From specialized skills to full workforce management, we cover every hiring need in the tech sector.</p>
+
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+        </div>
+        <h3>Specialized Skills Staffing</h3>
+        <p>We shortlist only candidates who bring proven value — validated skill sets, relevant experience, and a strong culture fit for your team.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+        </div>
+        <h3>Contingent Workforce</h3>
+        <p>Flexible contract and contract-to-hire staffing that adapts to your project timelines and budget constraints.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        </div>
+        <h3>Business Consulting</h3>
+        <p>Gap analysis, project planning, timelines, and cost analysis — we help you build a roadmap, not just fill a role.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4"/><path d="M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9c2.39 0 4.56.93 6.17 2.44"/></svg>
+        </div>
+        <h3>Permanent Placement</h3>
+        <p>Full-cycle recruiting with background verification, reference checks, and education validation — so you only meet the best.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+        </div>
+        <h3>Executive Search</h3>
+        <p>C-suite and senior leadership placement with dedicated headhunting, confidential outreach, and structured interview management.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        </div>
+        <h3>Technical Assessment</h3>
+        <p>Our tech-savvy recruitment team validates candidates through structured assessments — no compromises on quality.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- APPROACH -->
+<section id="approach">
+  <div class="section-inner">
+    <div class="section-tag">How It Works</div>
+    <h2 class="section-title">Our staffing process</h2>
+    <p class="section-sub">A clear, transparent process from your first call to the day your new hire starts.</p>
+
+    <div class="approach-grid">
+      <div class="approach-card">
+        <div class="approach-num">01</div>
+        <div>
+          <h3>Understand your needs</h3>
+          <p>We thoroughly review your job description, culture, budget, and timeline before anything else.</p>
+        </div>
+      </div>
+      <div class="approach-card">
+        <div class="approach-num">02</div>
+        <div>
+          <h3>Search &amp; screen</h3>
+          <p>We tap our internal database and job networks, then hand-screen candidates for fit before they reach you.</p>
+        </div>
+      </div>
+      <div class="approach-card">
+        <div class="approach-num">03</div>
+        <div>
+          <h3>Shortlist &amp; present</h3>
+          <p>You receive a curated shortlist — not a pile of resumes. Quality over quantity, every time.</p>
+        </div>
+      </div>
+      <div class="approach-card">
+        <div class="approach-num">04</div>
+        <div>
+          <h3>Manage interviews</h3>
+          <p>We coordinate scheduling, collect feedback, and keep both sides informed through every round.</p>
+        </div>
+      </div>
+      <div class="approach-card">
+        <div class="approach-num">05</div>
+        <div>
+          <h3>Verify &amp; offer</h3>
+          <p>Background checks, reference calls, and education verification — then we help close the offer.</p>
+        </div>
+      </div>
+      <div class="approach-card">
+        <div class="approach-num">06</div>
+        <div>
+          <h3>Onboard &amp; support</h3>
+          <p>We stay engaged post-placement to ensure a smooth transition and long-term success.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section id="why">
+  <div class="section-inner">
+    <div class="why-grid">
+      <div class="why-left">
+        <div class="section-tag">Why Navio</div>
+        <h2 class="section-title">Choosy about clients. Committed to results.</h2>
+        <p class="section-sub">We work with one client at a time, giving you the undivided attention large firms can't offer.</p>
+
+        <ul class="why-list">
+          <li class="why-item">
+            <div class="check"><svg viewBox="0 0 12 10"><polyline points="1,5 4,8 11,1"/></svg></div>
+            <span>Assured resource hiring within your budget</span>
+          </li>
+          <li class="why-item">
+            <div class="check"><svg viewBox="0 0 12 10"><polyline points="1,5 4,8 11,1"/></svg></div>
+            <span>Quick turnaround — typical shortlist in 48 hours</span>
+          </li>
+          <li class="why-item">
+            <div class="check"><svg viewBox="0 0 12 10"><polyline points="1,5 4,8 11,1"/></svg></div>
+            <span>Huge internal database of pre-vetted resumes</span>
+          </li>
+          <li class="why-item">
+            <div class="check"><svg viewBox="0 0 12 10"><polyline points="1,5 4,8 11,1"/></svg></div>
+            <span>Complete dedication to one client at a time</span>
+          </li>
+          <li class="why-item">
+            <div class="check"><svg viewBox="0 0 12 10"><polyline points="1,5 4,8 11,1"/></svg></div>
+            <span>Technical recruitment team — not just HR generalists</span>
+          </li>
+          <li class="why-item">
+            <div class="check"><svg viewBox="0 0 12 10"><polyline points="1,5 4,8 11,1"/></svg></div>
+            <span>Single point of contact throughout the entire engagement</span>
+          </li>
+          <li class="why-item">
+            <div class="check"><svg viewBox="0 0 12 10"><polyline points="1,5 4,8 11,1"/></svg></div>
+            <span>No compromise on quality — we'd rather say no than send the wrong candidate</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="why-right">
+        <h3>Let's talk about your next hire.</h3>
+        <p>Whether you need one contractor by Friday or want to build a team over the next quarter, we're ready to help.</p>
+        <a href="#contact" class="btn-primary" style="display:inline-block; margin-top:0.5rem;">Start a conversation →</a>
+        <div class="contact-detail" style="margin-top:2rem;">
+          <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.77 12c-.9-2.62-1.52-5.35-1.85-8.08A2 2 0 013.9 2H7a2 2 0 012 1.72c.12.96.33 1.9.63 2.81a2 2 0 01-.45 2.11L7.91 9.91a16 16 0 006.18 6.18l1.27-1.27a2 2 0 012.11-.45c.91.3 1.85.51 2.81.63A2 2 0 0122 16.92z"/></svg>
+          <a href="tel:6508628294">(650) 862-8294</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT CTA -->
+<section id="contact">
+  <div class="section-inner" style="text-align:center;">
+    <h2 class="section-title">Ready to find your next great hire?</h2>
+    <p>Tell us what you're looking for and we'll reach back within one business day.</p>
+    <a href="mailto:info@navioinc.com" class="btn-white">Get in Touch</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2024 Navio Inc · <a href="tel:6508628294">(650) 862-8294</a> · All rights reserved.</p>
+</footer>
+
+</body>
+</html>
